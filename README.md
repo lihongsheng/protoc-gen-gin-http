@@ -1,5 +1,6 @@
 # protoc-gen-gin-http
-protoc-gen-gin-http 是基于proto google api来生成gin router代理的插件。实现的效果是当定义一个proto路由的时候。依托与[kratos-gen-http](https://github.com/go-kratos/kratos/tree/main/cmd/protoc-gen-go-http)
+protoc-gen-gin-http 是基于proto google api来生成gin router代理的插件。实现的效果是当定义一个proto路由的时候，可以自动生成gin router的路由注册和代理转发功能。
+参考与[kratos-gen-http](https://github.com/go-kratos/kratos/tree/main/cmd/protoc-gen-go-http)
 ## 1. 我们先定义一个proto
 ```protobuf
 service Demo {
