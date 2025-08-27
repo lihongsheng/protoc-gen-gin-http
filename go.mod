@@ -1,4 +1,4 @@
-module github.com/singer-stack-lab/protoc-gen-gin-http
+module github.com/lihongsheng/protoc-gen-gin-http
 
 go 1.24.3
 
