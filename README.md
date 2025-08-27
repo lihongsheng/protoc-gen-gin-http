@@ -114,7 +114,10 @@ type GetArticlesReq struct {
 ## 3. 完整运行示例
 ```shell
 # 先安装 go install github.com/lihongsheng/protoc-gen-gin-http@latest
-protoc .\test\demo.proto --go_out=./test --go-grpc_out=./test --gin-http_out=./test -I .\third_party\ -I .\
+protoc ./test/demo.proto --go_out=./test --go-grpc_out=./test --gin-http_out=./test -I ./third_party -I ./
 # 给pb.go 加上gin tag,便于绑定uri 参数
+# win下
 protoc-go-inject-tag -input="$($PWD)\test\demo\demo.pb.go"
+# Mac/Linux
+protoc-go-inject-tag -input="$PWD/test/demo/demo.pb.go"
 ```
