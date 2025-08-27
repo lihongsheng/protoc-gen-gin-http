@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package demo;
+import "google/api/annotations.proto";
+option go_package="./demo";
+
+message Request {
+  string ping = 1;
+}
+
+message Response {
+  string pong = 1;
+}
+
+service Demo {
+  rpc Ping(Request) returns(Response) {
+    option (google.api.http) = {
+      post: "/api/grpcDemo/ping"
+      body: "*"
+    };
+  };
+}
+message UserRequest {
+  string name = 1;
+  string age = 2;
+  string sex = 3;
+}
+message UserResponse {
+  string name = 1;
+  string age = 2;
+  string sex = 3;
+  string email = 4;
+}
+service User {
+  rpc Get(UserRequest) returns(UserResponse) {
+    option (google.api.http) = {
+      post: "/api/grpcDemo/ping"
+      body: "*"
+    };
+  };
+}
+
+
+// blog service is a blog demo
+service BlogService {
+  rpc GetArticles(GetArticlesReq) returns (GetArticlesResp) {
+    option (google.api.http) = {
+      get: "/v1/articles"
+      additional_bindings {
+        get: "/v1/author/{author_id}/articles"
+      }
+    };
+  }
+
+  rpc CreateArticle(Article) returns (Article) {
+    option (google.api.http) = {
+      post: "/v1/author/{author_id}/articles",
+      body: "*"
+    };
+  }
+}
+
+message GetArticlesReq {
+  string title = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  // 作者ID
+  // @gotags: form:"author_id" uri:"author_id"
+  int32 author_id = 4;
+}
+
+message GetArticlesResp {
+  int64 total = 1;
+  repeated Article articles = 2;
+}
+
+message Article {
+  string title  = 1;
+  string content = 2;
+  // @gotags: form:"author_id" uri:"author_id"
+  int32 author_id = 3;
+}
