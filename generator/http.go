@@ -23,6 +23,7 @@ const (
 	grpcPackage    = protogen.GoImportPath("google.golang.org/grpc")
 	errPkg         = protogen.GoImportPath("errors")
 	metadataPkg    = protogen.GoImportPath("google.golang.org/grpc/metadata")
+	httpPkg        = protogen.GoImportPath("net/http")
 )
 
 var methodSets = make(map[string]int)
@@ -52,15 +53,14 @@ func GenerateFile(gen *protogen.Plugin, file *protogen.File, omitemptyPrefix str
 	return g
 }
 
-// generateFileContent generates the kratos errors definitions, excluding the package statement.
+// generateFileContent
 func generateFileContent(gen *protogen.Plugin, file *protogen.File, g *protogen.GeneratedFile, omitemptyPrefix string) {
 	if len(file.Services) == 0 {
 		return
 	}
 	g.P("// This is a compile-time assertion to ensure that this generated file")
-	g.P("// is compatible with the kratos package it is being compiled against.")
-	//g.P("// ", contextPackage.Ident(""), errPkg.Ident(""))
-	g.P("//", ginPackage.Ident(""), grpcPackage.Ident(""), metadataPkg.Ident(""))
+	//  g.P("// ", contextPackage.Ident(""), errPkg.Ident(""))
+	g.P("//", ginPackage.Ident(""), grpcPackage.Ident(""), metadataPkg.Ident(""), httpPkg.Ident(""))
 	g.P()
 
 	for _, service := range file.Services {
